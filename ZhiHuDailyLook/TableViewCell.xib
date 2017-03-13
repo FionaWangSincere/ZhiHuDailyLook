@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="ZhiHuDailyLook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="352" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="352" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acj-Kg-ayT">
+                        <rect key="frame" x="8" y="14" width="244" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="KBJ-Yl-dU5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iZc-Gf-hdz">
+                        <rect key="frame" x="260" y="11" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="0Dh-2D-Nt5"/>
+                            <constraint firstAttribute="height" constant="80" id="DF6-iX-q1h"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="iZc-Gf-hdz" secondAttribute="trailing" constant="12" id="6Tn-dd-dcA"/>
+                    <constraint firstItem="acj-Kg-ayT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Auw-EK-Cep"/>
+                    <constraint firstAttribute="bottom" secondItem="iZc-Gf-hdz" secondAttribute="bottom" constant="11" id="QG5-BG-Mrq"/>
+                    <constraint firstItem="iZc-Gf-hdz" firstAttribute="leading" secondItem="acj-Kg-ayT" secondAttribute="trailing" constant="8" id="Tso-QQ-zOI"/>
+                    <constraint firstItem="iZc-Gf-hdz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Vh2-f3-CN7"/>
+                    <constraint firstItem="iZc-Gf-hdz" firstAttribute="leading" secondItem="acj-Kg-ayT" secondAttribute="trailing" constant="8" id="gt5-Zb-3fb"/>
+                    <constraint firstItem="acj-Kg-ayT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="heu-3K-Y1W"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="acj-Kg-ayT" id="JH8-wN-tqp"/>
+                <outlet property="photoImage" destination="iZc-Gf-hdz" id="0c7-u4-UW8"/>
+            </connections>
+            <point key="canvasLocation" x="50" y="83.5"/>
+        </tableViewCell>
+    </objects>
+</document>
