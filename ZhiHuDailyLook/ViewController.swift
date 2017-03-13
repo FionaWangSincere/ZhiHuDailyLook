@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import Alamofire
+
 
 class ViewController: UIViewController
 
@@ -23,9 +23,7 @@ class ViewController: UIViewController
         
         loadTableView()
 //        getHTTPRequest()
-        alam
-        
-
+ 
     }
 
      override func didReceiveMemoryWarning() {
