@@ -14,6 +14,8 @@ class ViewController: UIViewController
 
 {
 
+    let color = [UIColor.yellow, UIColor.red, UIColor.blue, UIColor.green, UIColor.purple, UIColor.brown, UIColor.darkGray]
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     let reusedIdentifier = "TableViewCell"
@@ -23,6 +25,8 @@ class ViewController: UIViewController
         
         loadTableView()
 //        getHTTPRequest()
+        
+        
  
     }
 
@@ -37,9 +41,12 @@ class ViewController: UIViewController
         self.tableView.dataSource = self
         self.tableView.rowHeight = 100
         self.tableView.separatorStyle = .none
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        
     }
     
-//    func getHTTPRequest(){
+    //    func getHTTPRequest(){
 //        let url = URL(string: "http://news-at.zhihu.com/api/4/news/latest")
 //        let request = URLRequest(url: url!)
 //        let configuration = URLSessionConfiguration.default
@@ -62,4 +69,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         cell.photoImage.backgroundColor = UIColor.blue
         return cell
     }
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return color.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
+        collectionCell.backgroundColor = color[indexPath.row]
+        return collectionCell
+    }
+    
 }
