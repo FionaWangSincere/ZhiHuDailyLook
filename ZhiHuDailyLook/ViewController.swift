@@ -24,7 +24,7 @@ class ViewController: UIViewController
         super.viewDidLoad()
         
         loadTableView()
-//        getHTTPRequest()
+        httpRequest()
         
         
  
@@ -46,12 +46,31 @@ class ViewController: UIViewController
         
     }
     
-    //    func getHTTPRequest(){
-//        let url = URL(string: "http://news-at.zhihu.com/api/4/news/latest")
-//        let request = URLRequest(url: url!)
-//        let configuration = URLSessionConfiguration.default
-//        let session = URLSession(configuration: configuration)
-//    }
+    // http
+    func httpRequest(){
+        let url: NSURL = NSURL(string: "http://news-at.zhihu.com/api/4/news/latest")!
+        let request = URLRequest(url: url as URL)
+        let configeration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configeration)
+        
+        let dataTask = session.dataTask(with: request){
+           ( data, response, error)in
+            
+        if error == nil{
+                do{
+                    
+                    let responseData:NSDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+                    
+                    print("code:\(responseData["error_code"])" as Any)
+                    print("结果： \(responseData["reason"])" as Any)
+                }catch{
+                    
+                }
+                }
+        }
+        print("###FAILD")
+        dataTask.resume()
+    }
     
 }
 
