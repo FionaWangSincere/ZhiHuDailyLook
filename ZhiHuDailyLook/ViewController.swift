@@ -107,11 +107,25 @@ class ViewController: UIViewController
         // 3
         let dataTask = session.dataTask(with: url as URL, completionHandler: {
             data, response, error in
-            if let error = error {
-                print("Failure! \(error)")
-            } else {
-                print("Success! \(response!)")
+            
+                if error == nil{
+                    if let jsonResult = self.parse(json: data!){
+                        
+                        print("ASynchronous\(jsonResult)")
+                    }else{
+                    print("******FAILD")
+                }
+                
+                
+                
+                
+            
+        
+        
+        
             }
+        
+        
         
         })
         // 5
