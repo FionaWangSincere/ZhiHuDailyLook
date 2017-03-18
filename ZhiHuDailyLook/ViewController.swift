@@ -24,7 +24,15 @@ class ViewController: UIViewController
         super.viewDidLoad()
         
         loadTableView()
-        httpRequest()
+//       httpRequest()
+        
+        let urlString = "http://news-at.zhihu.com/api/4/news/latest"
+        let url = urlWithSearchText(searchText: urlString)
+        let jsonString = performStoreRequest(with: url as URL)
+//        print("JSON IS \(jsonString)")
+        if let jsonDictionary = parse(json: jsonString!) {
+            print("Dictionary \(jsonDictionary)")
+        }
         
         
  
@@ -47,30 +55,61 @@ class ViewController: UIViewController
     }
     
     // http
-    func httpRequest(){
-        let url: NSURL = NSURL(string: "http://news-at.zhihu.com/api/4/news/latest")!
-        let request = URLRequest(url: url as URL)
-        let configeration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configeration)
-        
-        let dataTask = session.dataTask(with: request){
-           ( data, response, error)in
-            
-        if error == nil{
-                do{
-                    
-                    let responseData:NSDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-                    
-                    print("code:\(responseData["error_code"])" as Any)
-                    print("结果： \(responseData["reason"])" as Any)
-                }catch{
-                    
-                }
-                }
-        }
-        print("###FAILD")
-        dataTask.resume()
+//    func httpRequest(){
+//        let url: NSURL = NSURL(string: "http://news-at.zhihu.com/api/4/news/latest")!
+//        let request = URLRequest(url: url as URL)
+//        let configeration = URLSessionConfiguration.default
+//        let session = URLSession(configuration: configeration)
+//        
+//        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {
+//            data, response, error in
+//    
+//        if error == nil{
+//                do{
+//                    
+//                    let responseData:NSDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+//                    
+//                    print("code:\(responseData["error_code"])" as Any)
+//                    print("结果： \(responseData["reason"])" as Any)
+//                }catch{
+//                    
+//                }
+//        }else{
+//            print("###FAILD lalalallalal")
+//            }
+//        })
+//        print("###FAILD")
+//        dataTask.resume()
+//}
+
+    func urlWithSearchText(searchText: String) -> NSURL {
+        let escapedSearchText = searchText.addingPercentEncoding(
+            withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        let urlString = String(format:escapedSearchText)
+        let url = NSURL(string: urlString)
+        return url!
     }
+    
+    func performStoreRequest(with url: URL) -> String? {
+        do {
+            return try String(contentsOf: url, encoding: .utf8)
+        } catch {
+            print("Download Error: \(error)")
+            return nil
+        }
+    }
+    
+    func parse(json: String) -> [String: Any]? {
+        guard let data = json.data(using: .utf8, allowLossyConversion: false)
+            else { return nil }
+        do {
+            return try JSONSerialization.jsonObject(
+                with: data, options: []) as? [String: Any]
+        } catch {
+            print("JSON Error: \(error)")
+            return nil
+        } }
+    
     
 }
 
