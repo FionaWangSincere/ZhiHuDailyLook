@@ -19,21 +19,22 @@ class ViewController: UIViewController
     @IBOutlet weak var tableView: UITableView!
     
     let reusedIdentifier = "TableViewCell"
+    var dataTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadTableView()
-//       httpRequest()
+        HTTPRequest()
         
-        let urlString = "http://news-at.zhihu.com/api/4/news/latest"
-        let url = urlWithSearchText(searchText: urlString)
-        let jsonString = performStoreRequest(with: url as URL)
-//        print("JSON IS \(jsonString)")
-        if let jsonDictionary = parse(json: jsonString!) {
-            print("Dictionary \(jsonDictionary)")
-        }
-        
+//        let urlString = "http://news-at.zhihu.com/api/4/news/latest"
+//        let url = urlWithSearchText(searchText: urlString)
+//        let jsonString = performStoreRequest(with: url as URL)
+////        print("JSON IS \(jsonString)")
+//        if let jsonDictionary = parse(json: jsonString!) {
+//            print("Dictionary \(jsonDictionary)")
+//        }
+//        
         
  
     }
@@ -56,31 +57,66 @@ class ViewController: UIViewController
     
     // http
 //    func httpRequest(){
-//        let url: NSURL = NSURL(string: "http://news-at.zhihu.com/api/4/news/latest")!
-//        let request = URLRequest(url: url as URL)
-//        let configeration = URLSessionConfiguration.default
-//        let session = URLSession(configuration: configeration)
 //        
-//        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {
-//            data, response, error in
-//    
-//        if error == nil{
-//                do{
+//        let urlAddress = "http://news-at.zhihu.com/api/4/news/latest"
+//        let url = urlWithSearchText(searchText: urlAddress)
+//        let session = URLSession.shared
+//        self.dataTask = session.dataTask(with: url, completionHandler: {data, reponse, error in
+//            
+////            if let error = error as? NSError, error.code == -999{
+////                return
+////            }
+//            if let httpRespose = respose as? HTTPURLResponse,httpResponse.statusCode == 200{
+//                if let data = data, let jsonDictionary = self.parse(json: data) {
+//                    self.searchResults = self.parse(dictionary: jsonDictionary)
+//                    self.searchResults.sort(by: <)
 //                    
-//                    let responseData:NSDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-//                    
-//                    print("code:\(responseData["error_code"])" as Any)
-//                    print("结果： \(responseData["reason"])" as Any)
-//                }catch{
-//                    
+//                    DispatchQueue.main.async {
+//                        self.isLoading = false
+//                        self.tableView.reloadData()
+//                    }
+//                    return
 //                }
-//        }else{
-//            print("###FAILD lalalallalal")
+//            } else {
+//                print("Failure! \(response)")
 //            }
+//    
+////        if error == nil{
+////                do{
+////
+////                    let responseData:NSDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+////                    
+////                    print("code:\(responseData["error_code"])" as Any)
+////                    print("结果： \(responseData["reason"])" as Any)
+////                }catch{
+////                    
+////                }
+////        }else{
+////            print("###FAILD lalalallalal")
+////            }
 //        })
 //        print("###FAILD")
-//        dataTask.resume()
+//        dataTask?.resume()
 //}
+    
+    func HTTPRequest(){
+        let urlAddress = "http://news-at.zhihu.com/api/4/news/latest"
+        let url = urlWithSearchText(searchText: urlAddress)
+        // 2
+        let session = URLSession.shared
+        // 3
+        let dataTask = session.dataTask(with: url as URL, completionHandler: {
+            data, response, error in
+            if let error = error {
+                print("Failure! \(error)")
+            } else {
+                print("Success! \(response!)")
+            }
+        
+        })
+        // 5
+        dataTask.resume()
+    }
 
     func urlWithSearchText(searchText: String) -> NSURL {
         let escapedSearchText = searchText.addingPercentEncoding(
@@ -90,25 +126,26 @@ class ViewController: UIViewController
         return url!
     }
     
-    func performStoreRequest(with url: URL) -> String? {
-        do {
-            return try String(contentsOf: url, encoding: .utf8)
-        } catch {
-            print("Download Error: \(error)")
-            return nil
-        }
-    }
+//    func performStoreRequest(with url: URL) -> String? {
+//        do {
+//            return try String(contentsOf: url, encoding: .utf8)
+//        } catch {
+//            print("Download Error: \(error)")
+//            return nil
+//        }
+//    }
     
-    func parse(json: String) -> [String: Any]? {
-        guard let data = json.data(using: .utf8, allowLossyConversion: false)
-            else { return nil }
+    func parse(json data: Data) -> [String: Any]? {
+//        guard let data = json.data(using: .utf8, allowLossyConversion: false)
+//            else { return nil }
         do {
             return try JSONSerialization.jsonObject(
                 with: data, options: []) as? [String: Any]
         } catch {
             print("JSON Error: \(error)")
             return nil
-        } }
+        }
+}
     
     
 }
