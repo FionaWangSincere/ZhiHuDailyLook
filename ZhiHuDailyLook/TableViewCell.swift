@@ -17,6 +17,8 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.nameLabel.numberOfLines = 0
+//        self.backgroundColor = UIColor.lightGray
+        self.frame.size.height -= 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

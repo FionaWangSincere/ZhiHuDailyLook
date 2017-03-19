@@ -38,8 +38,8 @@ class ViewController: UIViewController
 //            print("Dictionary \(jsonDictionary)")
 //        }
 //        
-        
- 
+        self.tableView.separatorStyle = .none
+    
     }
 
      override func didReceiveMemoryWarning() {
