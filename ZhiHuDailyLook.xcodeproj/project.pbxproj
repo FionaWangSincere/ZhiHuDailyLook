@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F214FEE41E7D744600F3F671 /* TableCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214FEE31E7D744600F3F671 /* TableCellModel.swift */; };
+		F214FEE61E7D875800F3F671 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214FEE51E7D875800F3F671 /* UIImageView.swift */; };
 		F2F9D2141E76CCF0003904D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9D2131E76CCF0003904D2 /* AppDelegate.swift */; };
 		F2F9D2161E76CCF0003904D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9D2151E76CCF0003904D2 /* ViewController.swift */; };
 		F2F9D2191E76CCF0003904D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2F9D2171E76CCF0003904D2 /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F214FEE31E7D744600F3F671 /* TableCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellModel.swift; sourceTree = "<group>"; };
+		F214FEE51E7D875800F3F671 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F2F9D2101E76CCF0003904D2 /* ZhiHuDailyLook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiHuDailyLook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F9D2131E76CCF0003904D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2F9D2151E76CCF0003904D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 			children = (
 				F2F9D2131E76CCF0003904D2 /* AppDelegate.swift */,
 				F2F9D2151E76CCF0003904D2 /* ViewController.swift */,
+				F214FEE51E7D875800F3F671 /* UIImageView.swift */,
+				F214FEE31E7D744600F3F671 /* TableCellModel.swift */,
 				F2F9D2171E76CCF0003904D2 /* Main.storyboard */,
 				F2F9D4381E7976BF003904D2 /* TopicViewController.swift */,
 				F2F9D2281E76D3C8003904D2 /* TableViewCell.swift */,
@@ -167,7 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F214FEE61E7D875800F3F671 /* UIImageView.swift in Sources */,
 				F2F9D21C1E76CCF0003904D2 /* ZhiHuDailyLook.xcdatamodeld in Sources */,
+				F214FEE41E7D744600F3F671 /* TableCellModel.swift in Sources */,
 				F2F9D22A1E76D3C8003904D2 /* TableViewCell.swift in Sources */,
 				F2F9D4391E7976BF003904D2 /* TopicViewController.swift in Sources */,
 				F2F9D2161E76CCF0003904D2 /* ViewController.swift in Sources */,

@@ -20,12 +20,15 @@ class ViewController: UIViewController
     
     let reusedIdentifier = "TableViewCell"
     var dataTask: URLSessionDataTask?
+    var downLoadTask : URLSessionDownloadTask?
+    var tableDataSource = [TableCellModel]()
+    let dataSource = ["给我一首歌的时间","你说你不懂我，我为了你牵手","是不是说没没有做完的梦最好","仅仅的拥抱变成永远","故事听到最后才说再见","你说我不该在这时候说了我爱你"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadTableView()
-        HTTPRequest()
+//        HTTPRequest()
         
 //        let urlString = "http://news-at.zhihu.com/api/4/news/latest"
 //        let url = urlWithSearchText(searchText: urlString)
@@ -110,23 +113,14 @@ class ViewController: UIViewController
             
                 if error == nil{
                     if let jsonResult = self.parse(json: data!){
+                        self.tableDataSource = self.paraseDictionary(dic: jsonResult)
+                    
                         
                         print("ASynchronous\(jsonResult)")
                     }else{
-                    print("******FAILD")
+                    print("******FAILD ")
                 }
-                
-                
-                
-                
-            
-        
-        
-        
             }
-        
-        
-        
         })
         // 5
         dataTask.resume()
@@ -159,8 +153,25 @@ class ViewController: UIViewController
             print("JSON Error: \(error)")
             return nil
         }
-}
+     }
     
+    func paraseDictionary(dic:[String:Any])->[TableCellModel]{
+        if let stories = dic["stories"] as? [String:Any]{
+            
+            for _ in stories{
+                let  tableCellModel = TableCellModel()
+                if let title = stories["title"] as? String{
+                    tableCellModel.title = title
+                }
+                if let image = stories["image"] as? String{
+                    tableCellModel.image = image
+                }
+                let result = tableCellModel
+                tableDataSource.append(result)
+            }
+        }
+        return tableDataSource 
+    }
     
 }
 
@@ -169,12 +180,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return dataSource.count
     
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reusedIdentifier, for: indexPath) as! TableViewCell
-        cell.nameLabel.text = "hahahahahhah"
+        
+        cell.nameLabel.text = dataSource[indexPath.row]
+        
+//        let indexpathImage = tableDataSource[indexPath.row].image
+//        if let url = URL(String:indexpathImage){
+//            downLoadTask = cell.photoImage.loadImage(url: url)
+//        }
+        
+//        if let smallURL = URL(string: searchResult.artworkSmallURL) {
+//            downloadTask = artworkImageView.loadImage(url: smallURL)
+//        }
+        
+        
         cell.photoImage.backgroundColor = UIColor.blue
         return cell
     }
